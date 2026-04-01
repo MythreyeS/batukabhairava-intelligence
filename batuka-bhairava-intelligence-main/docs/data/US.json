@@ -1,0 +1,317 @@
+{
+  "market_code": "US",
+  "market_name": "USA (NYSE/NASDAQ)",
+  "currency": "$",
+  "generated_at": "2026-03-27T17:55:45.819813-04:00",
+  "regime": "NEUTRAL",
+  "index_label": "S&P 500",
+  "index_close": null,
+  "index_sma20": null,
+  "total_scanned": 40,
+  "run_type": "BTST",
+  "sector_table": [
+    {
+      "sector": "Energy",
+      "avg_change_pct": 2.49,
+      "breadth": 1.0,
+      "count": 2
+    },
+    {
+      "sector": "FMCG",
+      "avg_change_pct": 1.01,
+      "breadth": 1.0,
+      "count": 3
+    },
+    {
+      "sector": "Healthcare",
+      "avg_change_pct": -1.03,
+      "breadth": 0.4,
+      "count": 5
+    },
+    {
+      "sector": "Industrial",
+      "avg_change_pct": -1.1,
+      "breadth": 0.0,
+      "count": 5
+    },
+    {
+      "sector": "Consumer",
+      "avg_change_pct": -1.25,
+      "breadth": 0.5,
+      "count": 4
+    },
+    {
+      "sector": "Technology",
+      "avg_change_pct": -2.15,
+      "breadth": 0.1,
+      "count": 10
+    },
+    {
+      "sector": "Media",
+      "avg_change_pct": -2.46,
+      "breadth": 0.0,
+      "count": 1
+    },
+    {
+      "sector": "Auto",
+      "avg_change_pct": -2.76,
+      "breadth": 0.0,
+      "count": 1
+    },
+    {
+      "sector": "Logistics",
+      "avg_change_pct": -2.77,
+      "breadth": 0.0,
+      "count": 1
+    },
+    {
+      "sector": "Banking",
+      "avg_change_pct": -2.97,
+      "breadth": 0.0,
+      "count": 6
+    }
+  ],
+  "man_of_match": {
+    "symbol": "C",
+    "name": "Citigroup",
+    "sector": "Banking",
+    "open": 111.07,
+    "close": 107.38,
+    "high": 111.86,
+    "low": 106.96,
+    "prev_close": 112.41,
+    "atr": 1.61,
+    "day_change_pct": -4.47,
+    "gap_pct": -1.19,
+    "intraday_pct": -3.32,
+    "mom_1d": -0.0447,
+    "mom_5d": -1.95,
+    "mom_20d": -2.55,
+    "mom_60d": -7.91,
+    "vol_ratio": 1.8,
+    "close_near_high": 0.0,
+    "above_sma20": 0.0,
+    "above_sma50": 0.0,
+    "rsi": 50.0,
+    "sma20": 109.38,
+    "sma50": 112.9
+  },
+  "news_drivers": [
+    {
+      "source": "Fed Reserve",
+      "title": "Federal Reserve Board announces it has made the joint findings with the Office of the Comptroller of the Currency required for the OCC to approve a request by Morgan Stanley Bank, N.A., for an exemption under section 23A of the Federal Reserve Act",
+      "link": "https://www.federalreserve.gov/newsevents/pressreleases/orders20260326a.htm",
+      "sentiment": 0.5
+    },
+    {
+      "source": "Fed Reserve",
+      "title": "Federal Reserve Board releases annual audited financial statements",
+      "link": "https://www.federalreserve.gov/newsevents/pressreleases/other20260325a.htm",
+      "sentiment": 0.5
+    },
+    {
+      "source": "Fed Reserve",
+      "title": "Federal Reserve Board issues enforcement actions with former employee of Ally Bank and former employee of Regions Bank",
+      "link": "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20260320a.htm",
+      "sentiment": 0.5
+    },
+    {
+      "source": "Fed Reserve",
+      "title": "Agencies request comment on proposals to modernize the regulatory capital framework and maintain the strength of the banking system",
+      "link": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260319a.htm",
+      "sentiment": 0.5
+    },
+    {
+      "source": "Fed Reserve",
+      "title": "Federal Reserve issues FOMC statement",
+      "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260318a.htm",
+      "sentiment": 0.5
+    },
+    {
+      "source": "Fed Reserve",
+      "title": "Federal Reserve Board and Federal Open Market Committee release economic projections from the March 17-18 FOMC meeting",
+      "link": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260318b.htm",
+      "sentiment": 0.5
+    }
+  ],
+  "news_sentiment": 0.49,
+  "btst_cards": [
+    {
+      "symbol": "XOM",
+      "entry": 170.99,
+      "target": 174.41,
+      "stop": 169.28,
+      "qty": 29,
+      "rr": 2.0,
+      "buy_low": 170,
+      "buy_high": 170,
+      "name": "ExxonMobil",
+      "conviction": 77.18,
+      "day_change_pct": 3.36,
+      "sector": "Energy",
+      "currency": "$",
+      "vol_ratio": 1.42,
+      "intraday_pct": 3.27,
+      "rsi": 50.0
+    }
+  ],
+  "intraday_cards": [
+    {
+      "symbol": "XOM",
+      "name": "ExxonMobil",
+      "entry": 170.99,
+      "buy_low": 170,
+      "buy_high": 170,
+      "target": 173.55,
+      "stop": 169.71,
+      "qty": 29,
+      "rr": 2.0,
+      "currency": "$",
+      "day_change_pct": 3.36,
+      "intraday_pct": 3.27,
+      "vol_ratio": 1.42,
+      "rsi": 50.0,
+      "conviction": 76.03,
+      "sector": "Energy"
+    },
+    {
+      "symbol": "KO",
+      "name": "Coca-Cola",
+      "entry": 75.71,
+      "buy_low": 75,
+      "buy_high": 75,
+      "target": 76.85,
+      "stop": 75.14,
+      "qty": 66,
+      "rr": 2.0,
+      "currency": "$",
+      "day_change_pct": 1.37,
+      "intraday_pct": 1.19,
+      "vol_ratio": 1.56,
+      "rsi": 50.0,
+      "conviction": 69.92,
+      "sector": "FMCG"
+    },
+    {
+      "symbol": "CVX",
+      "name": "Chevron",
+      "entry": 211.15,
+      "buy_low": 210,
+      "buy_high": 210,
+      "target": 214.32,
+      "stop": 209.56,
+      "qty": 23,
+      "rr": 2.0,
+      "currency": "$",
+      "day_change_pct": 1.62,
+      "intraday_pct": 1.44,
+      "vol_ratio": 1.25,
+      "rsi": 50.0,
+      "conviction": 68.9,
+      "sector": "Energy"
+    },
+    {
+      "symbol": "PEP",
+      "name": "PepsiCo",
+      "entry": 153.04,
+      "buy_low": 155,
+      "buy_high": 155,
+      "target": 155.34,
+      "stop": 151.89,
+      "qty": 32,
+      "rr": 2.0,
+      "currency": "$",
+      "day_change_pct": 1.47,
+      "intraday_pct": 1.26,
+      "vol_ratio": 1.17,
+      "rsi": 50.0,
+      "conviction": 67.86,
+      "sector": "FMCG"
+    },
+    {
+      "symbol": "PG",
+      "name": "Procter & Gamble",
+      "entry": 142.71,
+      "buy_low": 140,
+      "buy_high": 145,
+      "target": 144.85,
+      "stop": 141.64,
+      "qty": 35,
+      "rr": 2.0,
+      "currency": "$",
+      "day_change_pct": 0.2,
+      "intraday_pct": -0.01,
+      "vol_ratio": 1.75,
+      "rsi": 50.0,
+      "conviction": 66.44,
+      "sector": "FMCG"
+    }
+  ],
+  "longterm_cards": [
+    {
+      "symbol": "XOM",
+      "name": "ExxonMobil",
+      "close": 170.99,
+      "buy_low": 170,
+      "buy_high": 170,
+      "target": 191.51,
+      "stop": 165.87,
+      "qty": 87,
+      "rr": 4.01,
+      "currency": "$",
+      "day_change_pct": 3.36,
+      "mom_20d": 12.12,
+      "mom_60d": 42.27,
+      "rsi": 50.0,
+      "above_sma20": 1.0,
+      "above_sma50": 1.0,
+      "conviction": 95.83,
+      "sector": "Energy"
+    },
+    {
+      "symbol": "CVX",
+      "name": "Chevron",
+      "close": 211.15,
+      "buy_low": 200,
+      "buy_high": 210,
+      "target": 236.49,
+      "stop": 204.81,
+      "qty": 71,
+      "rr": 4.0,
+      "currency": "$",
+      "day_change_pct": 1.62,
+      "mom_20d": 13.06,
+      "mom_60d": 39.99,
+      "rsi": 50.0,
+      "above_sma20": 1.0,
+      "above_sma50": 1.0,
+      "conviction": 95.41,
+      "sector": "Energy"
+    },
+    {
+      "symbol": "MRK",
+      "name": "Merck",
+      "close": 119.63,
+      "buy_low": 120,
+      "buy_high": 120,
+      "target": 133.99,
+      "stop": 116.05,
+      "qty": 125,
+      "rr": 4.01,
+      "currency": "$",
+      "day_change_pct": 0.59,
+      "mom_20d": -2.67,
+      "mom_60d": 13.63,
+      "rsi": 50.0,
+      "above_sma20": 1.0,
+      "above_sma50": 1.0,
+      "conviction": 75.08,
+      "sector": "Healthcare"
+    }
+  ],
+  "tomorrow": {
+    "base": "Range-to-positive bias if Energy leadership sustains; watch opening breadth.",
+    "bull": "Breakout continuation possible if early breadth is strong; Energy could extend.",
+    "bear": "Failure to hold gains may drag; Financial Services weakness can cap upside."
+  }
+}
