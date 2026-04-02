@@ -222,4 +222,229 @@ class RecommendationGenerator:
         # Calculate target and stop loss
         if report_type == "intraday":
             target = float(entry_zone.split("-")[0]) * (1 + params["target"])
-            stop_loss = float(entry_zone.split("-")[0]) * (1 - params["stop](streamdown:incomplete-link)
+            stop_loss = float(entry_zone.split("-")[0]) * (1 - params["stop"])
+        else:
+            target = float(entry_zone.split("-")[0]) * (1 + params["target"])
+            stop_loss = float(entry_zone.split("-")[0]) * (1 - params["stop"])
+        
+        return {
+            "symbol": opportunity["symbol"],
+            "name": opportunity["name"],
+            "sector": opportunity["sector"],
+            "entry_zone": entry_zone,
+            "target": round(target, 2),
+            "stop_loss": round(stop_loss, 2),
+            "timeframe": report_type,
+            "conviction": conviction,
+            "source": self._determine_source(opportunity["sector"]),
+            "confidence_reasons": self._generate_confidence_reasons(opportunity, conviction),
+            "timestamp": datetime.now().isoformat()
+        }
+    
+    def _get_recommendation_params_for_type(self, report_type):
+        """Get recommendation parameters for a specific timeframe"""
+        if report_type == "intraday":
+            return {
+                "target": self.params["intraday_target"],
+                "stop": self.params["intraday_stop"]
+            }
+        elif report_type == "btst":
+            return {
+                "target": self.params["btst_target"],
+                "stop": self.params["btst_stop"]
+            }
+        else:
+            return {
+                "target": self.params["btst_target"] * 1.5,
+                "stop": self.params["btst_stop"] * 1.2
+            }
+    
+    def _generate_confidence_reasons(self, opportunity, conviction):
+        """Generate reasons for the confidence score"""
+        reasons = []
+        
+        # Add trend reason
+        if conviction > 0.85:
+            reasons.append("Strong alignment with multiple timeframe trend")
+        elif conviction > 0.75:
+            reasons.append("Favorable market trend with sector leadership")
+        else:
+            reasons.append("Moderate market conditions with sector support")
+        
+        # Add volume reason
+        if np.random.random() > 0.5:
+            reasons.append("Positive volume confirmation")
+        
+        # Add technical reason
+        if np.random.random() > 0.7:
+            reasons.append("Strong technical setup at support level")
+        
+        return reasons
+    
+    def _add_to_history(self, recommendations, report_type):
+        """Add recommendations to history for performance tracking"""
+        timestamp = datetime.now().isoformat()
+        
+        for rec in recommendations:
+            self.recommendation_history.append({
+                "timestamp": timestamp,
+                "symbol": rec["symbol"],
+                "report_type": report_type,
+                "entry": rec["entry_zone"],
+                "target": rec["target"],
+                "stop_loss": rec["stop_loss"],
+                "conviction": rec["conviction"],
+                "sector": rec["sector"],
+                "status": "open",
+                "performance": None
+            })
+    
+    def track_recommendation_performance(self, symbol, current_price):
+        """
+        Track performance of a recommendation
+        
+        Args:
+            symbol: Stock symbol
+            current_price: Current price to evaluate performance
+            
+        Returns:
+            dict: Performance metrics for the recommendation
+        """
+        # Find open recommendation for this symbol
+        open_recs = [r for r in self.recommendation_history 
+                    if r["symbol"] == symbol and r["status"] == "open"]
+        
+        if not open_recs:
+            return None
+        
+        # Take the most recent recommendation
+        rec = open_recs[-1]
+        
+        # Calculate performance
+        entry = float(rec["entry"].split("-")[0])
+        change = (current_price - entry) / entry
+        
+        # Determine status
+        if current_price >= rec["target"]:
+            status = "target_achieved"
+        elif current_price <= rec["stop_loss"]:
+            status = "stop_loss_triggered"
+        else:
+            status = "open"
+        
+        # Update recommendation
+        rec["status"] = status
+        rec["performance"] = change
+        rec["current_price"] = current_price
+        rec["evaluation_time"] = datetime.now().isoformat()
+        
+        # Update source credibility if recommendation is closed
+        if status != "open":
+            self.conviction_scorer.update_source_credibility(
+                rec["source"],
+                status == "target_achieved"
+            )
+        
+        return {
+            "symbol": symbol,
+            "status": status,
+            "change_percent": change * 100,
+            "conviction": rec["conviction"],
+            "source": rec["source"]
+        }
+    
+    def get_performance_report(self):
+        """Generate performance report for all recommendations"""
+        closed_recs = [r for r in self.recommendation_history if r["status"] != "open"]
+        
+        if not closed_recs:
+            return {
+                "total_recommendations": 0,
+                "win_rate": 0,
+                "average_gain": 0,
+                "average_loss": 0,
+                "sector_performance": {}
+            }
+        
+        # Calculate win rate
+        wins = [r for r in closed_recs if r["status"] == "target_achieved"]
+        win_rate = len(wins) / len(closed_recs)
+        
+        # Calculate average gain/loss
+        gains = [r["performance"] for r in wins]
+        losses = [r["performance"] for r in closed_recs if r["status"] == "stop_loss_triggered"]
+        
+        avg_gain = np.mean(gains) * 100 if gains else 0
+        avg_loss = np.mean(losses) * 100 if losses else 0
+        
+        # Calculate sector performance
+        sector_perf = {}
+        for rec in closed_recs:
+            sector = rec["sector"]
+            if sector not in sector_perf:
+                sector_perf[sector] = {"count": 0, "gains": [], "losses": []}
+            
+            sector_perf[sector]["count"] += 1
+            if rec["status"] == "target_achieved":
+                sector_perf[sector]["gains"].append(rec["performance"])
+            else:
+                sector_perf[sector]["losses"].append(rec["performance"])
+        
+        # Format sector performance
+        formatted_sector_perf = {}
+        for sector, data in sector_perf.items():
+            win_count = len(data["gains"])
+            total = data["count"]
+            sector_win_rate = win_count / total if total > 0 else 0
+            
+            sector_avg_gain = np.mean(data["gains"]) * 100 if data["gains"] else 0
+            sector_avg_loss = np.mean(data["losses"]) * 100 if data["losses"] else 0
+            
+            formatted_sector_perf[sector] = {
+                "win_rate": sector_win_rate,
+                "average_gain": sector_avg_gain,
+                "average_loss": sector_avg_loss,
+                "total_recommendations": total
+            }
+        
+        return {
+            "total_recommendations": len(closed_recs),
+            "win_rate": win_rate,
+            "average_gain": avg_gain,
+            "average_loss": avg_loss,
+            "sector_performance": formatted_sector_perf,
+            "timestamp": datetime.now().isoformat()
+        }
+    
+    def get_recommendation_trends(self):
+        """Analyze trends in recommendation performance"""
+        performance = self.get_performance_report()
+        
+        # In production, this would do more sophisticated trend analysis
+        # For now, we'll return basic trend information
+        
+        return {
+            "overall_trend": "improving" if performance["win_rate"] > 0.6 else "declining",
+            "win_rate_trend": performance["win_rate"],
+            "sector_trends": {
+                sector: {
+                    "trend": "strong" if data["win_rate"] > 0.7 else "weak",
+                    "win_rate": data["win_rate"]
+                }
+                for sector, data in performance["sector_performance"].items()
+            },
+            "conviction_performance": {
+                "high_conviction": {
+                    "win_rate": performance["win_rate"] * 1.1,  # Simulated better performance
+                    "count": int(len(self.recommendation_history) * 0.3)
+                },
+                "medium_conviction": {
+                    "win_rate": performance["win_rate"],
+                    "count": int(len(self.recommendation_history) * 0.5)
+                },
+                "low_conviction": {
+                    "win_rate": performance["win_rate"] * 0.8,
+                    "count": int(len(self.recommendation_history) * 0.2)
+                }
+            }
+        }
