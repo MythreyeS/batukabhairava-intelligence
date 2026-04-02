@@ -1,4 +1,4 @@
-pandas
+andas
 numpy
 yfinance>=0.2.38
 feedparser
@@ -11,3 +11,4 @@ beautifulsoup4
 gradio>=5.0.0
 openai>=1.30.0
 groq>=0.9.0
+schedule  # Add this if missing
